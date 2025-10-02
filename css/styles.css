@@ -1,0 +1,304 @@
+/* ===========================
+   Global Reset & Base Styles
+   =========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ===========================
+   Header
+   =========================== */
+header {
+  background: #227dc6; /* corporate blue */
+  color: white;
+  padding: 0.8rem 0;
+}
+
+.header-container {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img {
+  max-height: 80px;
+  width: auto;
+  transition: transform 0.2s ease-in-out;
+}
+
+.logo img:hover {
+  transform: scale(1.05);
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1.5rem;
+  font-weight: bold;
+  transition: color 0.2s ease-in-out;
+}
+
+nav a:hover {
+  color: #9ed069; /* modern green */
+}
+
+/* ===========================
+   Footer
+   =========================== */
+footer {
+  background: #e4322a; /* strong red */
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+}
+
+/* ===========================
+   Containers & Headings
+   =========================== */
+.container {
+  width: 90%;
+  margin: 2rem auto;
+}
+
+h1, h2, h3 {
+  color: #227dc6;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+/* ===========================
+   Product Grid
+   =========================== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.product-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+  max-width: 100%;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.product-card h3 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.product-card p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* ===========================
+   Filter & Search Bar
+   =========================== */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background: #f1f1f1;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.filter-bar label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.filter-bar select,
+.filter-bar input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+/* ===========================
+   Modal
+   =========================== */
+/* Modal (background overlay) */
+/* Modal (background overlay) */
+.modal {
+  display: none; /* Hidden when page loads */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  /* Flexbox centers the modal content */
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background: transparent;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 900px;   /* ✅ smaller, centered window */
+  max-height: 80vh;
+  overflow-y: auto;
+  text-align: left;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  display: flex;      /* ✅ flex built-in, no need for separate .modal-flex */
+  gap: 2rem;
+}
+
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 5 rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.close:hover { color: #e4322a;}
+
+/* ✅ New section for Technical Specifications */
+.modal-specs {
+  margin-top: 1rem;
+  text-align: left;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.modal-specs h4 {
+  margin: 1rem 0 0.5rem;
+  color: #227dc6;
+}
+
+.modal-specs ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.modal-specs p {
+  color: #e4322a;
+  font-weight: 500;
+}
+
+/* Flex layout for modal content */
+.modal-flex {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* Left side (image) */
+.modal-left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.modal-left img {
+  max-width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  border-radius: 0px;
+  box-shadow: 0 0px 0px rgba(0,0,0,0.1);
+}
+
+.modal-right {
+  flex: 1.5;
+}
+.modal-right h2 {
+  margin-bottom: 0.5rem;
+  color: #227dc6;
+}
+.modal-right p {
+  margin-bottom: 1rem;
+  color: #fff;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+/* Features and categories */
+.modal-specs h4 {
+  margin: 1rem 0 0.5rem;
+  color: #227dc6;
+}
+.modal-specs ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+.modal-specs p {
+  font-weight: 0.2rem;
+  color: #e4322a;
+  font-size: 1rem;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 768px) {
+  .modal-content {
+    flex-direction: column;
+    width: 95%;
+    max-width: 500px;
+  }
+  .modal-left img {
+    max-height: 40vh;
+  }
+}
+
+
+
+
+/* Fade animation */
+@keyframes fadeIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
