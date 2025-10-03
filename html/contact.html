@@ -8,13 +8,30 @@
 </head>
 <body>
   <div id="header"></div>
-  <div class="container">
-    <h2>Contact Us</h2>
-    <p>Branch Office Address: 26A Villegas St. Brgy. Bungad Project 7, Quezon City </p>
-    <p>Email Address: maracaremed@yahoo.com and mara.tan@maracaremed.com </p>
-     <p>Mobile No.: 09176340946 / 0917861504 Tel. No. : (02)7-002-0862 </p>
-  </div>
+
+  <!-- Main Content -->
+  <main class="container">
+    <h1>Contact Us</h1>
+    <p>If you have inquiries about our products or services, please fill out the form below and we’ll get back to you shortly.</p>
+
+    <form id="contactForm" class="contact-form">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+      <label for="email">Your Email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+      <label for="subject">Subject:</label>
+      <input type="text" id="subject" name="subject" placeholder="Inquiry subject" required>
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="6" placeholder="Type your inquiry..." required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+  </main>
   
+    
   <div id="footer"></div>
   
   <script>

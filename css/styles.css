@@ -9,49 +9,70 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
-  line-height: 1.6;
+  /* ✅ Background image setup */
+  background: url("../images/background/1.jpg") no-repeat center center fixed;
+  background-size: cover; /* makes it responsive */
+  background-attachment: fixed; /* stays in place when scrolling */
+  background-color: #f5f5f5; /* fallback color */
+  margin: 0;
+  padding-top: 80px;
 }
 
-/* ===========================
-   Header
-   =========================== */
+/* Default header (transparent) */
 header {
-  background: #227dc6; /* corporate blue */
-  color: white;
-  padding: 0.8rem 0;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 80px;
+  background: transparent;
+  z-index: 1000;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Header when scrolled */
+header.scrolled {
+  background: white; /* solid background */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .header-container {
-  width: 90%;
-  margin: auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
+  height: 100%; /* ✅ ensures children align vertically */
+  padding: 0 2rem;
 }
 
+
 .logo img {
-  max-height: 80px;
-  width: auto;
+  max-height: 120px;
   transition: transform 0.2s ease-in-out;
 }
 
 .logo img:hover {
   transform: scale(1.05);
 }
+nav {
+flex: 1;
+text-align: center;
+}
 
 nav a {
-  color: white;
+  color: #227dc6;
+  padding: 0.5rem 1rem;
   text-decoration: none;
-  margin-left: 1.5rem;
+  margin-left: 8rem;
   font-weight: bold;
-  transition: color 0.2s ease-in-out;
+  transition: color 0.3s ease;
+  font-size: 1.2rem;
 }
 
 nav a:hover {
   color: #9ed069; /* modern green */
 }
+
+header.scrolled nav a {
+   color: #227dc6; }
 
 /* ===========================
    Footer
@@ -82,9 +103,12 @@ p {
   margin-bottom: 1rem;
 }
 
+
 /* ===========================
-   Product Grid
+   Product Page
    =========================== */
+   
+
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -125,6 +149,7 @@ p {
   font-size: 0.9rem;
   color: #555;
 }
+
 
 /* ===========================
    Filter & Search Bar
@@ -196,7 +221,7 @@ p {
   position: absolute;
   top: 15px;
   right: 20px;
-  font-size: 5 rem;
+  font-size: 5rem;
   font-weight: bold;
   color: #333;
   cursor: pointer;
@@ -277,7 +302,7 @@ p {
   color: #fff;
 }
 .modal-specs p {
-  font-weight: 0.2rem;
+  font-weight:100;
   color: #e4322a;
   font-size: 1rem;
 }
@@ -295,10 +320,234 @@ p {
 }
 
 
-
-
 /* Fade animation */
 @keyframes fadeIn {
   from { transform: scale(0.9); opacity: 0; }
   to   { transform: scale(1); opacity: 1; }
 }
+
+/* Contact Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.contact-form label {
+  font-weight: 600;
+  color: #227dc6;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #227dc6;
+  box-shadow: 0 0 5px rgba(34,125,198,0.5);
+}
+
+.contact-form button {
+  background: #227dc6;
+  color: white;
+  border: none;
+  padding: 0.9rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.contact-form button:hover {
+  background: #1b5f99;
+}
+
+/* Hero Slideshow */
+.slideshow-container {
+  position: relative;
+  max-width: 100%;
+  height: 1000px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.slide {
+  display: none;
+  height: 100%;
+}
+
+.slide img {
+  width: 100%;
+  height: 1000px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.caption {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  background: rgba(0,0,0,0.5);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+/* Navigation Arrows */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  transition: 0.3s;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  background: rgba(0,0,0,0.4);
+}
+.next { right: 0; border-radius: 3px 0 0 3px; }
+.prev:hover, .next:hover { background: rgba(0,0,0,0.8); }
+
+/* Dots */
+.dots-container { margin-top: 15px; }
+.dot {
+  cursor: pointer;
+  height: 15px; width: 15px;
+  margin: 0 4px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+.active, .dot:hover { background-color: transparent; }
+
+/* Reset nav link states */
+header nav a,
+header nav a:visited {
+  color: #333;
+  text-decoration: none;
+}
+
+header.scrolled nav a,
+header.scrolled nav a:visited {
+  color: #333;
+}
+
+/* Hover effect */
+header nav a:hover {
+  color: #444;
+}
+
+/* Active page (Products highlighted) */
+header nav a.active {
+  border-bottom: 2px solid #e4322a;
+}
+
+/* Hamburger hidden on desktop */
+.menu-toggle {
+  display: block;
+  font-size: 28px;
+  cursor: pointer;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  header nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 80px; /* below header */
+    right: 0;
+    background: white;
+    width: 200px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+
+  header nav a {
+    color: #333;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  header nav.show {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+
+body.inner-page header {
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+body.inner-page header nav a {
+  color: #333;
+}
+
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    text-align:center;
+}
+
+/* Dropdown menu hidden by default */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0; /* align with parent */
+    min-width: 100%; /* take full width of "Products" */
+    background: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 6px;
+    z-index: 999;
+    flex-direction: column;
+    text-align: center;
+}
+
+    .dropdown-menu a {
+        padding: 10px;
+        color: #333;
+        text-decoration: none;
+        display: block;
+        text-align:center;
+    }
+
+        .dropdown-menu a:hover {
+            background: #f0f0f0;
+            color: #227dc6;
+            border-radius:4px;
+        }
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+    display: flex;
+}
+
+
+

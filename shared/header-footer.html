@@ -1,16 +1,44 @@
-<header>
-  <div class="header-container">
-    <a href="../html/index.html" class="logo">
-      <img src="../images/logo.png" alt="MaraCare Medical Devices Inc." style="height:60px;">
-    </a>
-    <nav>
-      <a href="../html/index.html">Home</a>
-      <a href="../html/products.html">Products</a>
-      <a href="../html/about.html">About</a>
-      <a href="../html/contact.html">Contact Us</a>
-    </nav>
-  </div>
+﻿<header>
+    <div class="header-container">
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+            <img src="../images/logo.png" alt="MaraCare Logo">
+        </a>
+
+        <!-- Navigation -->
+        <nav id="navMenu">
+            <a href="index.html">Home</a>
+
+            <div class="dropdown">
+                <a href="products.html">Products ▾</a>
+                <div class="dropdown-menu">
+                    <a href="products.html?dept=all">All Departments</a>
+                    <a href="products.html?dept=pulmo">Pulmonary</a>
+                    <a href="products.html?dept=anesth">Anesthesia/OR</a>
+                    <a href="products.html?dept=cardio">Cardiology/Heart Station</a>
+                    <a href="products.html?dept=nicu">NICU</a>
+                    <a href="products.html?dept=icu">ICU</a>
+                    <a href="products.html?dept=ob">OB-GYN</a>
+                    <a href="products.html?dept=sleep">Sleep Lab</a>
+                    <a href="products.html?dept=radio">Radiology</a>
+                    <a href="products.html?dept=ent">ENT</a>
+                    <a href="products.html?dept=er">ER</a>
+                    <a href="products.html?dept=consu">Consumables</a>
+                    <a href="products.html?dept=machi">Machines</a>
+                </div>
+            </div>
+
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+
+        <!-- Mobile Hamburger -->
+        <div class="menu-toggle" id="menuToggle">
+            ☰
+        </div>
+    </div>
 </header>
+
 <footer>
-  <p>&copy; 2025 MaraCare Medical Devices Inc.</p>
+    <p>&copy; 2025 MaraCare Medical Devices Inc. All rights reserved.</p>
 </footer>
