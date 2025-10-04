@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - MaraCare Medical Devices Inc.</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <div id="header"></div>
+
+    <div class="about_us">
+        <img src="../images/showcase/about.png" alt="About" />
+
+
+        <!-- ✅ Add images here -->
+        <div class="services-images">
+            <img src="../images/showcase/service1.png" alt="Medical Consultation" />
+            <img src="../images/showcase/service2.png" alt="Our Service" />
+        </div>
+
+
+    </div>
+
+    <div id="footer"></div>
+    <script>
+        fetch("../shared/header-footer.html")
+            .then(r => r.text())
+            .then(html => {
+                document.getElementById("header").outerHTML = html.split("<footer>")[0];
+                document.getElementById("footer").outerHTML = "<footer>" + html.split("<footer>")[1];
+
+                // ✅ Run scroll effect after header is inserted
+                initHeaderScrollEffect();
+            });
+
+        function initHeaderScrollEffect() {
+            const header = document.querySelector("header");
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 50) {
+                    header.classList.add("scrolled");
+                } else {
+                    header.classList.remove("scrolled");
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,708 @@
+/* ===========================
+   Global Reset & Base Styles
+   =========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  /* ✅ Background image setup */
+  background: url("../images/background/1.jpg") no-repeat center center fixed;
+  background-size: cover; /* makes it responsive */
+  background-attachment: fixed; /* stays in place when scrolling */
+  background-color: #f5f5f5; /* fallback color */
+  margin: 0;
+  padding-top: 50px;
+}
+
+/* Default header (transparent) */
+header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 80px;
+  background: transparent;
+  z-index: 1000;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Header when scrolled */
+ header.scrolled {
+    background: rgba(255,255,255,0.95); /* slightly transparent */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* ✅ ensures children align vertically */
+  padding: 0 2rem;
+}
+
+
+.logo img {
+  max-height: 120px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.logo img:hover {
+  transform: scale(1.05);
+}
+nav {
+flex: 1;
+text-align: center;
+}
+
+  /* ===========================
+   Header
+   =========================== */
+    nav a {
+        color: #1f3276;
+        padding: 0.5rem 5rem;
+        text-decoration: none;
+        margin-left: 0;
+        font-weight: bold;
+        transition: color 0.3s ease;
+        font-size: 1rem;
+        text-align: center;
+    }
+    /* Active page link */
+    nav a.active {
+        text-decoration: underline;
+        text-underline-offset: 4px; /* spacing under text */
+        font-weight: bold; /* same as hover emphasis */
+        color: #227dc6; /* main blue color */
+    }
+
+    /* Hover effect */
+    nav a:hover {
+        color: #9ed069; /* modern green */
+    }
+
+header.scrolled nav a {
+   color: #227dc6; }
+
+header.scrolled nav a:hover {
+    color:#9ed069;
+}
+
+
+/* ===========================
+   Footer
+   =========================== */
+footer {
+  background: #e4322a; /* strong red */
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+}
+
+/* ===========================
+   Containers & Headings
+   =========================== */
+.container {
+    width: 90%;
+    margin: 2rem auto;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+h1, h2, h3 {
+    color: #1f3276;
+    margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+
+/* ===========================
+   Product Page
+   =========================== */
+   
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.product-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+  max-width: 100%;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.product-card h3 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.product-card p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* ===========================
+   Filter & Search Bar
+   =========================== */
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background: #f1f1f1;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+
+}
+
+.filter-bar label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.filter-bar select,
+.filter-bar input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+/* ===========================
+   Modal
+   =========================== */
+/* Modal (background overlay) */
+/* Modal (background overlay) */
+.modal {
+  display: none; /* Hidden when page loads */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  /* Flexbox centers the modal content */
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background: transparent;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 900px;   /* ✅ smaller, centered window */
+  max-height: 80vh;
+  overflow-y: auto;
+  text-align: left;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  display: flex;      /* ✅ flex built-in, no need for separate .modal-flex */
+  gap: 2rem;
+}
+
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 5rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.close:hover { color: #e4322a;}
+
+/* ✅ New section for Technical Specifications */
+.modal-specs {
+  margin-top: 1rem;
+  text-align: left;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.modal-specs h4 {
+  margin: 1rem 0 0.5rem;
+  color: #227dc6;
+}
+
+.modal-specs ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.modal-specs p {
+  color: #e4322a;
+  font-weight: 500;
+}
+
+/* Flex layout for modal content */
+.modal-flex {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* Left side (image) */
+.modal-left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.modal-left img {
+  max-width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  border-radius: 0px;
+  box-shadow: 0 0px 0px rgba(0,0,0,0.1);
+}
+
+.modal-right {
+  flex: 1.5;
+}
+.modal-right h2 {
+  margin-bottom: 0.5rem;
+  color: #227dc6;
+}
+.modal-right p {
+  margin-bottom: 1rem;
+  color: #fff;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+/* Features and categories */
+.modal-specs h4 {
+  margin: 1rem 0 0.5rem;
+  color: #227dc6;
+}
+.modal-specs ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+.modal-specs p {
+  font-weight:100;
+  color: #e4322a;
+  font-size: 1rem;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 768px) {
+  .modal-content {
+    flex-direction: column;
+    width: 95%;
+    max-width: 500px;
+  }
+  .modal-left img {
+    max-height: 40vh;
+  }
+}
+
+
+/* Fade animation */
+@keyframes fadeIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* Contact Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.contact-form label {
+  font-weight: 600;
+  color: #227dc6;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #227dc6;
+  box-shadow: 0 0 5px rgba(34,125,198,0.5);
+}
+
+    .contact-form button {
+        background: #1f3276;
+        color: white;
+        border: none;
+        padding: 0.9rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+.contact-form button:hover {
+  background: #1b5f99;
+}
+
+/* Hero Slideshow */
+.slideshow-container {
+  position: relative;
+  max-width: 80%;
+  height: 750px;
+  width:auto;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 0px 0px rgba(0,0,0,0.2);
+}
+
+.slide {
+  display: none;
+  height: 100%;
+}
+
+.slide img {
+  width: 100%;
+  height: 750px;
+  object-fit: fill;
+  border-radius: 5px;
+}
+
+.caption {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  background: rgba(0,0,0,0.5);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+/* Navigation Arrows */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  transition: 0.3s;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  background: rgba(0,0,0,0);
+}
+.next { right: 0; border-radius: 3px 0 0 3px; }
+.prev:hover, .next:hover { background: rgba(0,0,0,0.8); }
+
+/* Dots */
+.dots-container { margin-top: 15px; }
+.dot {
+  cursor: pointer;
+  height: 15px; width: 15px;
+  margin: 0 4px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+.active, .dot:hover { background-color: transparent; }
+
+
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0; /* align to left edge of parent */
+    width: 100%; /* fill the parent width */
+    background: #f0f0f0; /* the background color you want */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 6px;
+    z-index: 999;
+    flex-direction: column;
+    text-align: left; /* optional: left-align text */
+}
+
+
+    .dropdown-menu a {
+        display: block;
+        padding: 10px 20px;
+        width: 100%;
+        box-sizing: border-box;
+        color: #333;
+        text-decoration: none;
+    }
+
+    /* Remove underline and hover highlight for dropdown links */
+        .dropdown-menu a,
+        .dropdown-menu a.active,
+        .dropdown-menu a:hover {
+            text-decoration: none; /* no underline */
+            background: none; /* remove background color */
+            color: #333 ; /* keep base color */
+            font-weight: bold; /* optional, same as other dropdown links */
+        }
+
+    /* Hover highlight fills full width */
+        .dropdown-menu a:hover {
+            background: #227dc6;
+            color: white;
+        }
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+    display: flex;
+}
+
+.prod-images {
+    overflow: hidden;
+    height:100px; /* adjust height as you like */
+}
+
+    .prod-images img {
+        width: 100%;
+        object-fit: cover;
+        object-position: center top; /* keeps top part visible */
+    }
+
+
+.prod-images2 {
+    height: 960px;
+    overflow: hidden;
+    position: relative;
+}
+
+    .prod-images2 img {
+        width: 100%;
+        position: absolute;
+        bottom: 0; /* pin image bottom to container bottom */
+    }
+
+/* Center button below slideshow */
+.hero-btn-container {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.hero-btn {
+    display: inline-block;
+    background-color: #0074c2; /* adjust to match your theme */
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+    .hero-btn:hover {
+        background-color: #005a9c;
+        transform: translateY(-3px);
+    }
+
+
+/* ===========================
+   📱 Responsive Design
+   =========================== */
+
+/* --- For tablets and smaller laptops (max-width: 1024px) --- */
+@media (max-width: 1024px) {
+
+    /* Header adjustments */
+    .header-container {
+        padding: 0 1rem;
+    }
+
+    nav a {
+        padding: 0.5rem 2rem;
+        font-size: 0.95rem;
+    }
+
+    /* Product grid: 2 columns */
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+    }
+
+    /* Slideshow smaller height */
+    .slideshow-container {
+        max-width: 95%;
+        height: 500px;
+    }
+
+    .slide img {
+        height: 500px;
+    }
+
+    /* Modal slightly smaller */
+    .modal-content {
+        width: 90%;
+        max-width: 700px;
+    }
+}
+
+/* --- For mobile phones (max-width: 768px) --- */
+@media (max-width: 768px) {
+
+    /* Stack header elements vertically */
+    .header-container {
+        flex-direction: column;
+        height: auto;
+        padding: 0.5rem 1rem;
+    }
+
+    .logo img {
+        max-height: 80px;
+        margin-bottom: 0.5rem;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+        nav a {
+            display: block;
+            padding: 0.75rem 0;
+            font-size: 0.95rem;
+        }
+
+    /* Dropdown menu full-width */
+    .dropdown-menu {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+    }
+
+    /* Filter bar stack */
+    .filter-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    /* Product grid: 1 column */
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Modal stack */
+    .modal-content {
+        flex-direction: column;
+        width: 95%;
+        max-width: 500px;
+    }
+
+    .modal-left img {
+        max-height: 40vh;
+    }
+
+    /* Contact form width */
+    .contact-form {
+        width: 90%;
+    }
+
+    /* Slideshow height */
+    .slideshow-container {
+        height: 350px;
+        max-width: 95%;
+    }
+
+    .slide img {
+        height: 350px;
+        object-fit: cover;
+    }
+
+    .caption {
+        font-size: 1rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .hero-btn {
+        font-size: 1rem;
+        padding: 10px 24px;
+    }
+}
+
+/* --- For very small screens (max-width: 480px) --- */
+@media (max-width: 480px) {
+
+    nav a {
+        font-size: 0.9rem;
+    }
+
+    .product-card img {
+        height: 120px;
+    }
+
+    .modal-right p {
+        font-size: 1.5rem;
+    }
+
+    .hero-btn {
+        font-size: 0.9rem;
+        padding: 8px 20px;
+    }
+}
