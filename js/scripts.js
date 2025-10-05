@@ -1,4 +1,4 @@
-﻿// scripts.js
+// scripts.js
 console.log("scripts.js loaded");
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -167,3 +167,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 200);
     }
 });
+
+// --- Mobile Menu Toggle ---
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
+
+if (menuToggle && navMenu) {
+    menuToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+    });
+}
