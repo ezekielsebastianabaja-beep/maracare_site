@@ -64,13 +64,13 @@ text-align: center;
    =========================== */
     nav a {
         color: #1f3276;
-        padding: 0.5rem 5rem;
+        padding: 6rem;
         text-decoration: none;
         margin-left: 0;
-        font-weight: bold;
-        transition: color 0.3s ease;
-        font-size: 1.2rem;
+        transition: color 0.6s ease;
+        font-size: 1.8rem;
         text-align: center;
+        font-family: 'League Spartan', sans-serif;
     }
     /* Active page link */
     nav a.active {
@@ -118,6 +118,8 @@ footer {
 h1, h2, h3 {
     color: #1f3276;
     margin-bottom: 1rem;
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 700;
 }
 
 p {
@@ -126,51 +128,79 @@ p {
 
 
 /* ===========================
-   Product Page
+   🔹 Enhanced Product Grid
    =========================== */
-   
-
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.8rem;
+    margin-top: 3rem;
+    padding: 1rem;
 }
 
 .product-card {
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  text-align: center;
-  padding: 1rem;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  cursor: pointer;
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 14px;
+    text-align: center;
+    padding: 1.5rem;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+    overflow: hidden;
 }
 
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 10px rgba(0,0,0,0.15);
-}
+    .product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+    }
 
     .product-card img {
         width: 100%;
-        height: auto;
-        max-height: 180px;
+        height: 200px;
         object-fit: contain;
+        background: transparent;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        transition: transform 0.3s ease;
+    }
+
+    .product-card:hover img {
+        transform: scale(1.05);
+    }
+
+    .product-card h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #1f3276;
+        margin-bottom: 0.4rem;
+        font-family: 'League Spartan', sans-serif;
+        line-height: 1.2;
     }
 
 
-.product-card h3 {
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
+    .product-card p {
+        font-size: 0.95rem;
+        color: #444;
+        margin-bottom: 1rem;
+       
+    }
 
-.product-card p {
-  font-size: 0.9rem;
-  color: #555;
-}
+    .product-card button {
+        background: #227dc6;
+        border: none;
+        color: white;
+        padding: 0.5rem 1.2rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+        .product-card button:hover {
+            background: #1f5f99;
+        }
+
+
 
 /* ===========================
    Filter & Search Bar
@@ -201,143 +231,193 @@ p {
   font-size: 0.95rem;
 }
 
+
 /* ===========================
-   Modal
+   🔹 Improved Modal Design
    =========================== */
-/* Modal (background overlay) */
-/* Modal (background overlay) */
 .modal {
-  display: none; /* Hidden when page loads */
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-
-  /* Flexbox centers the modal content */
-  justify-content: center;
-  align-items: center;
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    padding: 2rem;
+    animation: fadeInScale 0.35s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    backdrop-filter: blur(6px);
 }
 
+/* Smooth fade + scale in */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
-/* Modal Content */
 .modal-content {
-  position: relative;
-  background: transparent;
-  padding: 2rem;
-  border-radius: 12px;
-  width: 80%;
-  max-width: 900px;   /* ✅ smaller, centered window */
-  max-height: 80vh;
-  overflow-y: auto;
-  text-align: left;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  display: flex;      /* ✅ flex built-in, no need for separate .modal-flex */
-  gap: 2rem;
+    background: #ffffff;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 850px;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: fadeIn 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-height: 85vh;
+    overflow-y: auto;
 }
 
-
-/* Close button */
 .close {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 5rem;
-  font-weight: bold;
-  color: #333;
-  cursor: pointer;
+    position: absolute;
+    top: 18px;
+    right: 25px;
+    font-size: 2rem;
+    color: #227dc6;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
-.close:hover { color: #e4322a;}
+    .close:hover {
+        color: #e4322a;
+    }
 
-/* ✅ New section for Technical Specifications */
-.modal-specs {
-  margin-top: 1rem;
-  text-align: left;
-  font-size: 0.95rem;
-  color: #333;
+.modal-flex {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.modal-left img {
+    width: 100%;
+    max-width: 340px;
+    height:500px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: transparent;
+    padding: 0.5rem;
+}
+
+.modal-right h2 {
+    color: #1f3276;
+    font-size: 1.8rem;
+}
+
+.modal-right p {
+    color: red;
+    font-size: 1rem;
+    line-height: 1.6;
 }
 
 .modal-specs h4 {
-  margin: 1rem 0 0.5rem;
-  color: #227dc6;
-}
-
-.modal-specs ul {
-  list-style: disc;
-  padding-left: 1.5rem;
-  margin-bottom: 1rem;
+    color: #227dc6;
+    margin-top: 1rem;
 }
 
 .modal-specs p {
-  color: #e4322a;
-  font-weight: 500;
+  color: #444;
+  font-size: 0.9rem;
+  white-space: normal;          /* allows normal line breaks */
+  word-wrap: break-word;        /* breaks long words when needed */
+  overflow-wrap: break-word;    /* modern version for word wrapping */
+  line-height: 1.5;             /* improves readability */
+  text-align: justify;          /* optional: makes text edges align neatly */
 }
 
-/* Flex layout for modal content */
-.modal-flex {
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
-  align-items: flex-start;
+
+
+/* Stack modal on mobile */
+@media (max-width: 768px) {
+    .modal-flex {
+        flex-direction: column;
+    }
+
+    .modal-left img {
+        max-width: 100%
+    }
 }
 
-/* Left side (image) */
-.modal-left {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-.modal-left img {
-  max-width: 100%;
-  max-height: 60vh;
-  object-fit: contain;
-  border-radius: 0px;
-  box-shadow: 0 0px 0px rgba(0,0,0,0.1);
-}
 
 .modal-right {
-  flex: 1.5;
+  flex: 5;
 }
-.modal-right h2 {
-  margin-bottom: 0.5rem;
-  color: #227dc6;
-}
-.modal-right p {
-  margin-bottom: 1rem;
-  color: #fff;
-  font-weight: bold;
-  font-size: 2rem;
-}
+    .modal-right h2 {
+        margin-bottom: 0.5rem;
+        color: #1f3276;
+        font-family: 'League Spartan', sans-serif;
+    }
+    .modal-right p {
+        margin-bottom: 1rem;
+        color: black;
+        font-weight: 500;
+        font-size: 1.2rem;
+        font-family: 'League Spartan', sans-serif;
+    }
 
 /* Features and categories */
 .modal-specs h4 {
-  margin: 1rem 0 0.5rem;
-  color: #227dc6;
+    margin: 1rem 0 0.5rem;
+    color: #1f3276;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 1.2rem;
 }
-.modal-specs ul {
-  list-style: disc;
-  padding-left: 1.5rem;
-  margin-bottom: 1rem;
-  color: #fff;
 
-}
 .modal-specs p {
-  font-weight:100;
-  color: #e4322a;
-  font-size: 1rem;
+    font-weight: 100;
+    color: #227dc6;
+    font-size: 1.2rem;
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 400;
 }
 
+#modalbrand {
+    list-style: none; /* removes the bullet points */
+    padding: 0; /* removes default left indentation */
+    margin: 0; /* optional: cleans up spacing */
+}
 
+    #modalbrand li {
+        color: #227dc6; /* keeps your modal text consistent */
+        font-family: 'League Spartan', sans-serif;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem; /* adds space between features */
+    }
+
+
+
+.modal h2 {
+    color: #1f3276;
+    font-size: 2rem;
+    font-family: 'League Spartan', sans-serif;
+}
 
 /* Fade animation */
 @keyframes fadeIn {
-  from { transform: scale(0.9); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
+
 
 /* Contact Form */
 .contact-form {
@@ -387,9 +467,9 @@ p {
 /* Hero Slideshow */
 .slideshow-container {
   position: relative;
-  max-width: 80%;
-  height: 750px;
-  width:auto;
+  max-width: 100%;
+  height: auto;
+  width:100%;
   margin: auto;
   overflow: hidden;
   border-radius: 12px;
@@ -404,7 +484,7 @@ p {
 .slide img {
   width: 100%;
   height: auto;
-  max-height: 750px;
+  max-height: 1080px;
   object-fit: cover;
   border-radius: 5px;
 }
@@ -494,7 +574,7 @@ p {
             text-decoration: none; /* no underline */
             background: none; /* remove background color */
             color: #333 ; /* keep base color */
-            font-weight: bold; /* optional, same as other dropdown links */
+          
         }
 
     /* Hover highlight fills full width */
@@ -524,13 +604,14 @@ p {
     display: inline-block;
     background-color: #0074c2; /* adjust to match your theme */
     color: white;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     font-weight: 600;
     padding: 12px 28px;
     border-radius: 30px;
     text-decoration: none;
     transition: all 0.3s ease;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    font-family: 'League Spartan', sans-serif;
 }
 
     .hero-btn:hover {
@@ -574,24 +655,88 @@ p {
             display: flex;
         }
 
-        nav a, .dropdown > a {
+        /* -------------------------
+   🌐 MOBILE DROPDOWN FIX
+   ------------------------- */
+
+        nav a,
+        .dropdown > a {
             display: block;
-            padding: 12px 0;
+            padding: 0.9rem 1rem;
+            background: white;
+            color: #1f3276;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.25s ease, color 0.25s ease;
+            border-radius: 6px;
+            font-family: 'League Spartan', sans-serif;
         }
 
-    /* Optional: Dropdown behavior for mobile */
-    .dropdown-menu {
-        position: static;
-        display: none;
+            /* Subtle hover, not a solid blue bar */
+            nav a:hover,
+            .dropdown > a:hover {
+                background: rgba(0, 123, 255, 0.08);
+                color: #007bff;
+            }
+
+            /* Active link styling */
+            nav a.active {
+                background: rgba(0, 123, 255, 0.1);
+                color: #007bff;
+                border-left: 4px solid #007bff;
+            }
+
+    /* Dropdown menu — no background block behind parent link */
+    .dropdown {
+        background: white;
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
     }
+
+    /* Dropdown items inside Products */
+    .dropdown-menu {
+        background: #ffffff;
+        border-radius: 10px;
+        margin-top: 0.3rem;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        animation: fadeIn 0.25s ease;
+    }
+
+        /* Each sub-item */
+        .dropdown-menu a {
+            padding: 0.8rem 1rem;
+            color: #003366;
+            background: transparent;
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+            .dropdown-menu a:hover {
+                background: rgba(0, 123, 255, 0.08);
+                color: #007bff;
+            }
+
+    /* Dropdown toggle animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-5px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
 
         .dropdown-menu.show {
             display: block;
         }
 }
-
-
-
 
 
 
@@ -698,16 +843,26 @@ p {
         width: 90%;
     }
 
-    /* Slideshow height */
     .slideshow-container {
-        height: 350px;
+        height: auto; /* Let it resize naturally */
         max-width: 95%;
     }
 
     .slide img {
-        height: 350px;
-        object-fit: cover;
+        width: 100%;
+        height: auto; /* Keeps proportions */
+        object-fit: contain; /* Shows entire image, no cropping */
+        object-position: center; /* Center the image */
+        background: transparent /* Optional: prevents gray bars if transparent */
     }
+
+    .slide {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent; /* matches your site background */
+    }
+
 
     .caption {
         font-size: 1rem;
@@ -717,6 +872,14 @@ p {
     .hero-btn {
         font-size: 1rem;
         padding: 10px 24px;
+    }
+
+    .about_us img{
+        width: 100%;
+        height: auto; /* Keeps proportions */
+        object-fit: fill; 
+        object-position: center; /* Center the image */
+        background: transparent /* Optional: prevents gray bars if transparent */
     }
 }
 
@@ -745,6 +908,7 @@ p {
 
     .modal-right p {
         font-size: 1.5rem;
+
     }
 
     .hero-btn {
@@ -754,3 +918,50 @@ p {
 
 }
 
+.page-title{
+    padding: 10px 20px;
+    padding-top: 1rem;
+    font-size: 2rem;
+
+}
+
+.prod_desc {
+    line-height: 1.3;
+    font-size: 1.8rem;
+    color: #222;
+    padding: 2rem 6rem;
+    text-align:justify;
+}
+
+/* Make text wrap around the image */
+.prod_logo {
+    float: left;
+    width: 250px;
+    height: auto;
+    margin: 0 0rem 0rem 0; /* space around image */
+}
+
+/* Highlight styles */
+.prod_text .highlight,
+.highlight {
+    color: #0094cc;
+    font-weight: 600;
+}
+
+.highlight-blue {
+    color: #0072c6;
+    font-weight: 600;
+}
+
+/* Responsive fix: remove float on small screens */
+@media (max-width: 768px) {
+    .prod_logo {
+        float: none;
+        display: block;
+        margin: 0 auto 0.5rem;
+    }
+
+    .prod_desc {
+        text-align: center;
+    }
+}

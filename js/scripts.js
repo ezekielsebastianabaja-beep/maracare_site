@@ -1,4 +1,4 @@
-// scripts.js
+﻿// scripts.js
 console.log("scripts.js loaded");
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -8,9 +8,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const modalTitle = document.getElementById("modalTitle");
     const modalImage = document.getElementById("modalImage");
     const modalDescription = document.getElementById("modalDescription");
-    const modalFeatures = document.getElementById("modalFeatures");
-    const modalCategories = document.getElementById("modalCategories");
+    const modalbrand = document.getElementById("modalbrand");
+    const modalcountry = document.getElementById("modalcountry");
+    const modaloverview = document.getElementById("modaloverview");
     const closeBtn = document.querySelector(".close");
+    
 
     if (productCards.length && modal) {
         productCards.forEach(card => {
@@ -18,25 +20,28 @@ document.addEventListener("DOMContentLoaded", function () {
                 const title = card.querySelector("h3").innerText;
                 const imgSrc = card.querySelector("img").src;
                 const desc = card.querySelector("p").innerText;
-                const features = card.getAttribute("data-features");
-                const categories = card.getAttribute("data-categories");
+                const brand = card.getAttribute("data-brand");
+                const country = card.getAttribute("data-country");
+                const overview = card.getAttribute("overview");
 
                 modalTitle.innerText = title;
                 modalImage.src = imgSrc;
-                modalDescription.innerText = desc;
+            //    modalDescription.innerText = desc;
+                modaloverview.innerText = overview ? overview : "No overview available.";
+
 
                 // Features
-                modalFeatures.innerHTML = "";
-                if (features) {
-                    features.split("|").forEach(f => {
+                modalbrand.innerHTML = "";
+                if (brand) {
+                    brand.split("|").forEach(f => {
                         const li = document.createElement("li");
                         li.textContent = f.trim();
-                        modalFeatures.appendChild(li);
+                        modalbrand.appendChild(li);
                     });
                 }
 
                 // Categories
-                modalCategories.innerText = categories ? categories : "";
+                modalcountry.innerText = country ? country : "";
 
                 modal.style.display = "flex";
             });
@@ -166,14 +171,59 @@ document.addEventListener("DOMContentLoaded", function () {
             if (initHeaderScroll()) clearInterval(interval);
         }, 200);
     }
+
+    // --- Mobile Hamburger Menu ---
+    function initHamburgerMenu() {
+        const menuToggle = document.getElementById("menuToggle");
+        const navMenu = document.getElementById("navMenu");
+
+        if (!menuToggle || !navMenu) {
+            console.warn("⚠️ Header elements not yet loaded, retrying...");
+            return false;
+        }
+
+        menuToggle.addEventListener("click", function () {
+            navMenu.classList.toggle("active");
+            menuToggle.classList.toggle("active");
+        });
+
+        console.log("✅ Mobile menu toggle initialized");
+        return true;
+    }
+
+    // Retry if header is loaded dynamically
+    if (!initHamburgerMenu()) {
+        const interval = setInterval(() => {
+            if (initHamburgerMenu()) clearInterval(interval);
+        }, 200);
+    }
+
+    // --- Mobile Dropdown Tap Support ---
+    function initMobileDropdowns() {
+        const dropdownLinks = document.querySelectorAll(".dropdown > a");
+
+        dropdownLinks.forEach(link => {
+            link.addEventListener("click", function (e) {
+                // Only on small screens
+                if (window.innerWidth <= 768) {
+                    e.preventDefault(); // prevent page navigation
+                    const dropdownMenu = this.nextElementSibling;
+                    if (dropdownMenu) {
+                        dropdownMenu.classList.toggle("show");
+                    }
+                }
+            });
+        });
+    }
+
+    if (!initMobileDropdowns()) {
+        const interval = setInterval(() => {
+            if (initMobileDropdowns()) clearInterval(interval);
+        }, 200);
+    }
+    
+    
+
 });
 
-// --- Mobile Menu Toggle ---
-const menuToggle = document.getElementById("menuToggle");
-const navMenu = document.getElementById("navMenu");
 
-if (menuToggle && navMenu) {
-    menuToggle.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
-    });
-}
