@@ -419,6 +419,12 @@ p {
 }
 
 
+/* Prevent background scroll when modal is open */
+body.modal-open {
+  overflow: hidden;
+}
+
+
 /* Contact Form */
 .contact-form {
   display: flex;

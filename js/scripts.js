@@ -2,56 +2,69 @@
 console.log("scripts.js loaded");
 
 document.addEventListener("DOMContentLoaded", function () {
-    // --- Product Modal ---
-    const productCards = document.querySelectorAll(".product-card");
-    const modal = document.getElementById("productModal");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalImage = document.getElementById("modalImage");
-    const modalDescription = document.getElementById("modalDescription");
-    const modalbrand = document.getElementById("modalbrand");
-    const modalcountry = document.getElementById("modalcountry");
-    const modaloverview = document.getElementById("modaloverview");
-    const closeBtn = document.querySelector(".close");
-    
+// --- Product Modal ---
+const productCards = document.querySelectorAll(".product-card");
+const modal = document.getElementById("productModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalImage = document.getElementById("modalImage");
+const modalDescription = document.getElementById("modalDescription");
+const modalbrand = document.getElementById("modalbrand");
+const modalcountry = document.getElementById("modalcountry");
+const modaloverview = document.getElementById("modaloverview");
+const closeBtn = document.querySelector(".close");
 
-    if (productCards.length && modal) {
-        productCards.forEach(card => {
-            card.addEventListener("click", () => {
-                const title = card.querySelector("h3").innerText;
-                const imgSrc = card.querySelector("img").src;
-                const desc = card.querySelector("p").innerText;
-                const brand = card.getAttribute("data-brand");
-                const country = card.getAttribute("data-country");
-                const overview = card.getAttribute("overview");
+if (productCards.length && modal) {
+    productCards.forEach(card => {
+        card.addEventListener("click", () => {
+            const title = card.querySelector("h3").innerText;
+            const imgSrc = card.querySelector("img").src;
+            const desc = card.querySelector("p").innerText;
+            const brand = card.getAttribute("data-brand");
+            const country = card.getAttribute("data-country");
+            const overview = card.getAttribute("overview");
 
-                modalTitle.innerText = title;
-                modalImage.src = imgSrc;
-            //    modalDescription.innerText = desc;
-                modaloverview.innerText = overview ? overview : "No overview available.";
+            modalTitle.innerText = title;
+            modalImage.src = imgSrc;
+            modaloverview.innerText = overview ? overview : "No overview available.";
 
+            // Features
+            modalbrand.innerHTML = "";
+            if (brand) {
+                brand.split("|").forEach(f => {
+                    const li = document.createElement("li");
+                    li.textContent = f.trim();
+                    modalbrand.appendChild(li);
+                });
+            }
 
-                // Features
-                modalbrand.innerHTML = "";
-                if (brand) {
-                    brand.split("|").forEach(f => {
-                        const li = document.createElement("li");
-                        li.textContent = f.trim();
-                        modalbrand.appendChild(li);
-                    });
-                }
+            // Categories
+            modalcountry.innerText = country ? country : "";
 
-                // Categories
-                modalcountry.innerText = country ? country : "";
-
-                modal.style.display = "flex";
-            });
+            // Show modal
+            modal.style.display = "flex";
+            document.body.classList.add("modal-open"); // 🔒 Disable background scroll
         });
+    });
 
-        // Close modal
-        closeBtn.addEventListener("click", () => modal.style.display = "none");
-        window.addEventListener("click", (event) => { if (event.target === modal) modal.style.display = "none"; });
-        window.addEventListener("keydown", (event) => { if (event.key === "Escape") modal.style.display = "none"; });
+    // Close modal function
+    function closeModal() {
+        modal.style.display = "none";
+        document.body.classList.remove("modal-open"); // 🔓 Enable background scroll
     }
+
+    // Close modal on close button
+    closeBtn.addEventListener("click", closeModal);
+
+    // Close modal on outside click
+    window.addEventListener("click", (event) => {
+        if (event.target === modal) closeModal();
+    });
+
+    // Close modal on ESC key
+    window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeModal();
+    });
+}
 
     // --- Filter + Search Function ---
     const departmentFilter = document.getElementById("departmentFilter");
