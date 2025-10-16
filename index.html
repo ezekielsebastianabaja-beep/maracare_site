@@ -71,7 +71,7 @@
   <div id="footer"></div>
   
   <script>
-    fetch("../shared/header-footer.html")
+    fetch("/header-footer.html")
       .then(r => r.text())
       .then(html => {
         document.getElementById("header").outerHTML = html.split("<footer>")[0];
