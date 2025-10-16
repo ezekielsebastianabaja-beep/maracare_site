@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaraCare Medical Devices Inc.</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script defer src="../js/scripts.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+<body>
+  <div id="header"> </div>
+
+<main class="container">
+  <!-- Hero Slideshow -->
+    <section class="hero">
+        <div class="slideshow-container">
+
+            <div class="slide fade">
+                <img src="../images/showcase/1.png" alt="Medical Equipments 1">
+
+            </div>
+
+            <div class="slide fade">
+                <img src="../images/showcase/2.png" alt="Medical Equipments 2">
+
+            </div>
+
+            <div class="slide fade">
+                <img src="../images/showcase/3.png" alt="Medical Equipments 3">
+
+            </div>
+
+            <div class="slide fade">
+                <img src="../images/showcase/4.png" alt="Medical Equipments 4">
+
+            </div>
+            
+            <div class="slide fade">
+                <img src="../images/showcase/5.png" alt="Medical Equipments 5">
+
+            </div>
+
+
+            <!-- Navigation Arrows -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+
+        <!-- Dots -->
+        <div class="dots-container" style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+        </div>
+
+        <!-- View Products Button -->
+        <div class="hero-btn-container">
+            <a href="products.html" class="hero-btn">View Products</a>
+        </div>
+    </section>
+
+</main>
+
+  
+  <div id="footer"></div>
+  
+  <script>
+    fetch("../shared/header-footer.html")
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById("header").outerHTML = html.split("<footer>")[0];
+        document.getElementById("footer").outerHTML = "<footer>" + html.split("<footer>")[1];
+      });
+  </script>
+  
+</body>
+</html>
