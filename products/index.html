@@ -693,6 +693,20 @@ Foam Type (Pedia)
                         // Update URL without reload
                         history.pushState(null, '', link.href);
                     });
+
+					    // --- Refresh before navigating dropdown links ---
+				    const dropdownLinks = document.querySelectorAll(".dropdown-menu a");
+				
+				    dropdownLinks.forEach(link => {
+				        link.addEventListener("click", (event) => {
+				            event.preventDefault(); // stop default navigation
+				            const targetUrl = link.getAttribute("href");
+				
+				            // Refresh the page before going to the new URL
+				            window.location.href = targetUrl;
+				            window.location.reload();
+				        });
+				    });
                 });
             });
     </script>
