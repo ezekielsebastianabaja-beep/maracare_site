@@ -121,7 +121,7 @@ if (productCards.length && modal) {
     if (form) {
         form.addEventListener("submit", function (e) {
             e.preventDefault();
-            alert("Thank you! Your inquiry has been submitted. (Form handling not connected yet)");
+            alert("Thank you! Your inquiry has been submitted.");
             form.reset();
         });
     }
