@@ -24,33 +24,67 @@
         </div>
         <p>If you have inquiries about our products or services, please fill out the form below and we’ll get back to you shortly.</p>
 
-        <form id="contactForm" class="contact-form">
-            <label for="name">Your Name:</label>
-            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+<form id="contactForm" class="contact-form">
+    <label for="name">Your Name:</label>
+    <input type="text" id="name" name="user_name" placeholder="Enter your name" required>
 
-            <label for="email">Your Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+    <label for="email">Your Email:</label>
+    <input type="email" id="email" name="user_email" placeholder="Enter your email" required>
 
-            <label for="subject">Subject:</label>
-            <input type="text" id="subject" name="subject" placeholder="Inquiry subject" required>
+    <label for="subject">Subject:</label>
+    <input type="text" id="subject" name="user_subject" placeholder="Inquiry subject" required>
 
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="6" placeholder="Type your inquiry..." required></textarea>
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" rows="6" placeholder="Type your inquiry..." required></textarea>
 
-            <button type="submit">Send Message</button>
-        </form>
+    <button type="submit">Send Message</button>
+</form>
+	
     </main>
 
 
     <div id="footer"></div>
 
     <script>
-        fetch("/header-footer.html")
+        fetch("../shared/header-footer.html")
             .then(r => r.text())
             .then(html => {
                 document.getElementById("header").outerHTML = html.split("<footer>")[0];
                 document.getElementById("footer").outerHTML = "<footer>" + html.split("<footer>")[1];
             });
+    </script>
+    
+    
+        <!-- ✅ Add the EmailJS Library -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+    <!-- ✅ Add the EmailJS Form Handler -->
+    <script>
+        (function() {
+            emailjs.init("tnAT3Q6drqghAMwWH"); // 🔹 Replace with your actual Public Key
+        })();
+
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const button = this.querySelector("button");
+            button.textContent = "Sending...";
+            button.disabled = true;
+
+            emailjs.sendForm("service_nrp4px9a", "template_r303i0o", this)
+                .then(() => {
+                    alert("✅ Message sent successfully! We’ll get back to you soon.");
+                    this.reset();
+                })
+                .catch((error) => {
+                    console.error("EmailJS Error:", error);
+                    alert("❌ Something went wrong. Please try again later.");
+                })
+                .finally(() => {
+                    button.textContent = "Send Message";
+                    button.disabled = false;
+                });
+        });
     </script>
 
 
