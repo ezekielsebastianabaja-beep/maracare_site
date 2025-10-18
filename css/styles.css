@@ -1001,6 +1001,18 @@ body.modal-open {
     padding: 1rem;
 }
 
+.slide-text5 {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 90%;
+    max-width: 2000px;
+    z-index: 2;
+    padding: 1rem;
+}
+
     .slide-text h1 {
         font-family: 'League Spartan', sans-serif;
         font-weight: 900;
