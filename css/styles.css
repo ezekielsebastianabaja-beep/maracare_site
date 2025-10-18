@@ -1027,15 +1027,18 @@ body.modal-open {
         font-family: 'League Spartan', sans-serif;
         font-weight: 900;
         color: black; /* deep blue for main text */
-        font-size: 2rem;
+        font-size: 4rem;
         line-height: 0.7;
         text-transform: uppercase;
         text-shadow: 2px 2px 6px rgba(255, 255, 255, 0.8);
     }
 
       
-
     .slide-text .highlight-blue {
+        color: #25a1d7; /* matches your site’s blue */
+    }
+
+    .slide-text5 .highlight-blue {
         color: #25a1d7; /* matches your site’s blue */
     }
 
