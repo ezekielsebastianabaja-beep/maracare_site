@@ -1051,4 +1051,12 @@ body.modal-open {
         .slide-text h1 {
             font-size: 1.8rem;
         }
+
+       .slide-text5 {
+        top: 15%;
+    }
+
+        .slide-text5 h1 {
+            font-size: 1.8rem;
+        }
 }
