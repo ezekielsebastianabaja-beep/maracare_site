@@ -1003,13 +1003,25 @@ body.modal-open {
 
     .slide-text h1 {
         font-family: 'League Spartan', sans-serif;
-        font-weight: 800;
+        font-weight: 900;
         color: black; /* deep blue for main text */
         font-size: 6rem;
         line-height: 0.7;
         text-transform: uppercase;
         text-shadow: 2px 2px 6px rgba(255, 255, 255, 0.8);
     }
+
+   .slide-text5 h1 {
+        font-family: 'League Spartan', sans-serif;
+        font-weight: 900;
+        color: black; /* deep blue for main text */
+        font-size: 2rem;
+        line-height: 0.7;
+        text-transform: uppercase;
+        text-shadow: 2px 2px 6px rgba(255, 255, 255, 0.8);
+    }
+
+      
 
     .slide-text .highlight-blue {
         color: #25a1d7; /* matches your site’s blue */
