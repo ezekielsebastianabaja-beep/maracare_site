@@ -973,4 +973,55 @@ body.modal-open {
     }
 }
 
+/* ===============================
+   HERO SLIDESHOW TEXT OVERLAY
+   =============================== */
+.slide {
+    position: relative;
+}
 
+.slide-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 5px;
+    padding-top: 9rem;
+}
+
+/* Text Overlay Styling */
+.slide-text {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 90%;
+    max-width: 2000px;
+    z-index: 2;
+    padding: 1rem;
+}
+
+    .slide-text h1 {
+        font-family: 'League Spartan', sans-serif;
+        font-weight: 800;
+        color: black; /* deep blue for main text */
+        font-size: 6rem;
+        line-height: 0.7;
+        text-transform: uppercase;
+        text-shadow: 2px 2px 6px rgba(255, 255, 255, 0.8);
+    }
+
+    .slide-text .highlight-blue {
+        color: #25a1d7; /* matches your site’s blue */
+    }
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .slide-text {
+        top: 15%;
+    }
+
+        .slide-text h1 {
+            font-size: 1.8rem;
+        }
+}
