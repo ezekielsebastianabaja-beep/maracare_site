@@ -44,14 +44,27 @@
 
 
     <div id="footer"></div>
-
     <script>
-        fetch("../shared/header-footer.html")
+        fetch("/header-footer.html")
             .then(r => r.text())
             .then(html => {
                 document.getElementById("header").outerHTML = html.split("<footer>")[0];
                 document.getElementById("footer").outerHTML = "<footer>" + html.split("<footer>")[1];
+
+                // ✅ Run scroll effect after header is inserted
+                initHeaderScrollEffect();
             });
+
+        function initHeaderScrollEffect() {
+            const header = document.querySelector("header");
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 50) {
+                    header.classList.add("scrolled");
+                } else {
+                    header.classList.remove("scrolled");
+                }
+            });
+        }
     </script>
     
     
