@@ -1,0 +1,21 @@
+{
+  "name": "MaraCare Medical Devices Inc.",
+  "short_name": "MaraCare",
+  "description": "Meeting your expectations with high-quality, reliable medical equipment and hospital solutions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0a3d62",
+  "icons": [
+    {
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
