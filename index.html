@@ -19,18 +19,6 @@
     <link rel="shortcut icon" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
 
-
-     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "MaraCare Medical Devices Inc.",
-  "url": "https://maracaremedicaldevices.com/",
-  "logo": "https://maracaremedicaldevices.com/favicon.png"
-}
-</script>
-
-
 </head>
 <body>
   <div id="header"> </div>
@@ -121,14 +109,29 @@
   
   <div id="footer"></div>
   
-  <script>
-    fetch("/header-footer.html")
-      .then(r => r.text())
-      .then(html => {
-        document.getElementById("header").outerHTML = html.split("<footer>")[0];
-        document.getElementById("footer").outerHTML = "<footer>" + html.split("<footer>")[1];
-      });
-  </script>
+    <div id="footer"></div>
+    <script>
+        fetch("/header-footer.html")
+            .then(r => r.text())
+            .then(html => {
+                document.getElementById("header").outerHTML = html.split("<footer>")[0];
+                document.getElementById("footer").outerHTML = "<footer>" + html.split("<footer>")[1];
+
+                // ✅ Run scroll effect after header is inserted
+                initHeaderScrollEffect();
+            });
+
+        function initHeaderScrollEffect() {
+            const header = document.querySelector("header");
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 50) {
+                    header.classList.add("scrolled");
+                } else {
+                    header.classList.remove("scrolled");
+                }
+            });
+        }
+    </script>
   
 </body>
 </html>
