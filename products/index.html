@@ -672,45 +672,48 @@ Foam Type (Pedia)
             document.getElementById("header").outerHTML = html.split("<footer>")[0];
             document.getElementById("footer").outerHTML = "<footer>" + html.split("<footer>")[1];
 
-            // ✅ Run scripts after header is inserted
-            initHeaderScrollEffect();
-            initHamburgerMenu();
-        });
+            // Wait for header/footer to render
+            setTimeout(() => {
+                // --- Reinitialize hamburger menu ---
+                const menuToggle = document.getElementById("menuToggle");
+                const navMenu = document.getElementById("navMenu");
 
-    // --- Scroll Effect ---
-    function initHeaderScrollEffect() {
-        const header = document.querySelector("header");
-        window.addEventListener("scroll", () => {
-            if (window.scrollY > 50) {
-                header.classList.add("scrolled");
-            } else {
-                header.classList.remove("scrolled");
-            }
-        });
-    }
+                if (menuToggle && navMenu) {
+                    menuToggle.addEventListener("click", () => {
+                        navMenu.classList.toggle("active");
+                        menuToggle.classList.toggle("active");
+                    });
+                    console.log("✅ Hamburger menu initialized after fetch");
+                } else {
+                    console.warn("⚠️ Hamburger elements not found after header load.");
+                }
 
-    // --- Hamburger Menu Toggle ---
-    function initHamburgerMenu() {
-        const hamburger = document.querySelector(".hamburger");
-        const navMenu = document.querySelector(".nav-menu"); // adjust if needed
+                // --- Reinitialize scroll effect (optional) ---
+                const header = document.querySelector("header");
+                if (header) {
+                    window.addEventListener("scroll", () => {
+                        header.classList.toggle("scrolled", window.scrollY > 50);
+                    });
+                }
 
-        if (hamburger && navMenu) {
-            hamburger.addEventListener("click", () => {
-                hamburger.classList.toggle("active");
-                navMenu.classList.toggle("active");
-            });
+                // --- Active Page Highlight ---
+                const navLinks = document.querySelectorAll("nav a");
+                const currentPath = window.location.pathname.split("/").pop();
+                const currentParams = new URLSearchParams(window.location.search);
+                const currentDept = currentParams.get("dept") || "";
 
-            // Optional: Close menu when clicking a nav link (for mobile UX)
-            navMenu.querySelectorAll("a").forEach(link => {
-                link.addEventListener("click", () => {
-                    hamburger.classList.remove("active");
-                    navMenu.classList.remove("active");
+                navLinks.forEach(link => {
+                    const linkUrl = new URL(link.href, window.location.origin);
+                    const linkPath = linkUrl.pathname.split("/").pop();
+                    const linkDept = new URLSearchParams(linkUrl.search).get("dept") || "";
+
+                    if (linkPath === currentPath && !linkDept) link.classList.add("active");
+                    if (linkPath === "products.html" && linkDept === currentDept && currentDept !== "") link.classList.add("active");
+                    if (currentPath === "products.html" && link.textContent.includes("Products")) link.classList.add("active");
                 });
-            });
-        } else {
-            console.warn("⚠️ Hamburger or nav menu not found in header.");
-        }
-    }
+
+            }, 100); // small delay to ensure DOM is ready
+        });
 </script>
 </body>
 </html>
