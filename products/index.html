@@ -665,68 +665,52 @@ Foam Type (Pedia)
 
     <div id="footer"></div>
 
-    <script>
-        fetch("/header-footer.html")
-            .then(r => r.text())
-            .then(html => {
-                document.getElementById("header").outerHTML = html.split("<footer>")[0];
-                document.getElementById("footer").outerHTML = "<footer>" + html.split("<footer>")[1];
+<script>
+    fetch("/header-footer.html")
+        .then(r => r.text())
+        .then(html => {
+            document.getElementById("header").outerHTML = html.split("<footer>")[0];
+            document.getElementById("footer").outerHTML = "<footer>" + html.split("<footer>")[1];
 
-                // --- Active Page Highlight ---
-                const navLinks = document.querySelectorAll('nav a');
-                const currentPath = window.location.pathname.split("/").pop(); // e.g., "products.html"
-                const currentParams = new URLSearchParams(window.location.search);
-                const currentDept = currentParams.get("dept") || "";
+            // ✅ Run scripts after header is inserted
+            initHeaderScrollEffect();
+            initHamburgerMenu();
+        });
 
-                navLinks.forEach(link => {
-                    const linkUrl = new URL(link.href, window.location.origin);
-                    const linkPath = linkUrl.pathname.split("/").pop();
-                    const linkParams = new URLSearchParams(linkUrl.search);
-                    const linkDept = linkParams.get("dept") || "";
+    // --- Scroll Effect ---
+    function initHeaderScrollEffect() {
+        const header = document.querySelector("header");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) {
+                header.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
+            }
+        });
+    }
 
-                    // Highlight top-level links
-                    if (linkPath === currentPath && link.textContent.includes("Products")) {
-                        link.classList.add("active");
-                    }
+    // --- Hamburger Menu Toggle ---
+    function initHamburgerMenu() {
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu"); // adjust if needed
 
-                    // Highlight dropdown links if dept matches
-                    if (linkPath === currentPath && linkDept === currentDept && currentDept !== "") {
-                        link.classList.add("active");
-                    }
-                });
+        if (hamburger && navMenu) {
+            hamburger.addEventListener("click", () => {
+                hamburger.classList.toggle("active");
+                navMenu.classList.toggle("active");
+            });
 
-                // --- Dropdown filter links ---
-                const dropdownLinks = document.querySelectorAll('.dropdown-menu a');
-                const departmentFilter = document.getElementById("departmentFilter");
-
-                dropdownLinks.forEach(link => {
-                    link.addEventListener('click', function (e) {
-                        e.preventDefault(); // prevent page reload
-                        const url = new URL(link.getAttribute('href'), window.location.origin);
-                        const dept = url.searchParams.get('dept') || 'all';
-                        if (departmentFilter) {
-                            departmentFilter.value = dept;
-                            departmentFilter.dispatchEvent(new Event('change')); // trigger filterProducts()
-                        }
-                        // Update URL without reload
-                        history.pushState(null, '', link.href);
-                    });
-
-					    // --- Refresh before navigating dropdown links ---
-				    const dropdownLinks = document.querySelectorAll(".dropdown-menu a");
-				
-				    dropdownLinks.forEach(link => {
-				        link.addEventListener("click", (event) => {
-				            event.preventDefault(); // stop default navigation
-				            const targetUrl = link.getAttribute("href");
-				
-				            // Refresh the page before going to the new URL
-				            window.location.href = targetUrl;
-				            window.location.reload();
-				        });
-				    });
+            // Optional: Close menu when clicking a nav link (for mobile UX)
+            navMenu.querySelectorAll("a").forEach(link => {
+                link.addEventListener("click", () => {
+                    hamburger.classList.remove("active");
+                    navMenu.classList.remove("active");
                 });
             });
-    </script>
+        } else {
+            console.warn("⚠️ Hamburger or nav menu not found in header.");
+        }
+    }
+</script>
 </body>
 </html>
