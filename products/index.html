@@ -669,33 +669,12 @@ Foam Type (Pedia)
     fetch("/header-footer.html")
         .then(r => r.text())
         .then(html => {
+            // Insert header and footer
             document.getElementById("header").outerHTML = html.split("<footer>")[0];
             document.getElementById("footer").outerHTML = "<footer>" + html.split("<footer>")[1];
 
-            // Wait for header/footer to render
+            // Wait briefly for the DOM to update
             setTimeout(() => {
-                // --- Reinitialize hamburger menu ---
-                const menuToggle = document.getElementById("menuToggle");
-                const navMenu = document.getElementById("navMenu");
-
-                if (menuToggle && navMenu) {
-                    menuToggle.addEventListener("click", () => {
-                        navMenu.classList.toggle("active");
-                        menuToggle.classList.toggle("active");
-                    });
-                    console.log("✅ Hamburger menu initialized after fetch");
-                } else {
-                    console.warn("⚠️ Hamburger elements not found after header load.");
-                }
-
-                // --- Reinitialize scroll effect (optional) ---
-                const header = document.querySelector("header");
-                if (header) {
-                    window.addEventListener("scroll", () => {
-                        header.classList.toggle("scrolled", window.scrollY > 50);
-                    });
-                }
-
                 // --- Active Page Highlight ---
                 const navLinks = document.querySelectorAll("nav a");
                 const currentPath = window.location.pathname.split("/").pop();
@@ -705,15 +684,72 @@ Foam Type (Pedia)
                 navLinks.forEach(link => {
                     const linkUrl = new URL(link.href, window.location.origin);
                     const linkPath = linkUrl.pathname.split("/").pop();
-                    const linkDept = new URLSearchParams(linkUrl.search).get("dept") || "";
+                    const linkParams = new URLSearchParams(linkUrl.search);
+                    const linkDept = linkParams.get("dept") || "";
 
-                    if (linkPath === currentPath && !linkDept) link.classList.add("active");
-                    if (linkPath === "products.html" && linkDept === currentDept && currentDept !== "") link.classList.add("active");
-                    if (currentPath === "products.html" && link.textContent.includes("Products")) link.classList.add("active");
+                    // Highlight "Products" main link
+                    if (linkPath === currentPath && link.textContent.includes("Products")) {
+                        link.classList.add("active");
+                    }
+
+                    // Highlight dropdown department links
+                    if (linkPath === currentPath && linkDept === currentDept && currentDept !== "") {
+                        link.classList.add("active");
+                    }
                 });
 
-            }, 100); // small delay to ensure DOM is ready
+                // --- Dropdown filter links ---
+                const dropdownLinks = document.querySelectorAll(".dropdown-menu a");
+                const departmentFilter = document.getElementById("departmentFilter");
+
+                dropdownLinks.forEach(link => {
+                    link.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        const url = new URL(link.getAttribute("href"), window.location.origin);
+                        const dept = url.searchParams.get("dept") || "all";
+
+                        if (departmentFilter) {
+                            departmentFilter.value = dept;
+                            departmentFilter.dispatchEvent(new Event("change")); // trigger filterProducts()
+                        }
+
+                        // Refresh and navigate to new URL
+                        window.location.href = link.href;
+                        window.location.reload();
+                    });
+                });
+
+                // --- Reinitialize Hamburger Menu ---
+                const menuToggle = document.getElementById("menuToggle");
+                const navMenu = document.getElementById("navMenu");
+
+                if (menuToggle && navMenu) {
+                    menuToggle.addEventListener("click", () => {
+                        navMenu.classList.toggle("active");
+                        menuToggle.classList.toggle("active");
+                    });
+
+                    // Optional: close menu when clicking a link (mobile UX)
+                    navMenu.querySelectorAll("a").forEach(link => {
+                        link.addEventListener("click", () => {
+                            navMenu.classList.remove("active");
+                            menuToggle.classList.remove("active");
+                        });
+                    });
+                } else {
+                    console.warn("⚠️ Hamburger elements not found in header.");
+                }
+
+                // --- Header Scroll Effect ---
+                const header = document.querySelector("header");
+                if (header) {
+                    window.addEventListener("scroll", () => {
+                        header.classList.toggle("scrolled", window.scrollY > 50);
+                    });
+                }
+            }, 100); // delay ensures header/footer DOM is ready
         });
 </script>
+
 </body>
 </html>
